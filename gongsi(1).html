@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码更新</title>
+    <style>
+        .main{
+            width: 800px;
+            height: 400px;
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+	<div class="main">
+        <!--<p>-->
+            <!--<input class="sel" type="checkbox">-->
+            <!--<span>生三的你公司</span>-->
+        <!--</p>-->
+	</div>
+    <div class="divTxt" style="height: 50px;border:1px solid #000"></div>
+
+<script>
+    let main = document.getElementsByClassName('main')[0]
+    console.log(main)
+    let list = [
+      {plantCode: "fmztys", corpName: "1鴻富晉精密工業(太原)有限公司", qequenceId: 2},
+      {plantCode: "HFJZHY", corpName: "2鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+      {plantCode: "HFJZHY", corpName: "3鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+      {plantCode: "HFJZHY", corpName: "4鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+      {plantCode: "HFJZHY", corpName: "5鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+      {plantCode: "HFJZHY", corpName: "6鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+      {plantCode: "HFJZHY", corpName: "7鴻富錦精密工業(衡陽)有限公司", qequenceId: 3},
+    ]
+
+    for(let i=0;i<list.length;i++){
+        main.insertAdjacentHTML('beforeEnd', `
+         <p class="pp">
+            <input type="checkbox" class="sel">
+            <span>${list[i].corpName}</span>
+        </p>
+        `)
+    }
+
+    let arr = [0,1,2]
+    console.log('初始下标', arr)
+    txt(arr)
+
+    let inputs = document.getElementsByClassName('sel')
+    console.log(inputs)
+    for(let i=0;i<3;i++){
+    inputs[i].checked=true
+    }
+
+    for(let val of inputs){
+      val.onclick=function (e) {
+        let inputs = document.getElementsByClassName('sel')
+        let tar = e.target
+        let ids = [].indexOf.call(inputs,tar)
+        let arrIds = arr.indexOf(ids)
+        if(arrIds>-1){
+          arr.splice(arrIds,1)
+          inputs[ids].checked = false
+          txt(arr)
+        }else{
+          arr.push(ids)
+          inputs[ids].checked = true
+          txt(arr)
+        }
+        console.log('修改后arr的下边', arr)
+      }
+    }
+
+    function txt(arr){
+      let divTxt = document.getElementsByClassName('divTxt')[0]
+      let ps=document.getElementsByClassName('pp')
+      let str = ''
+      for(let i=0;i<arr.length;i++){
+        let txt = ps[arr[i]].lastElementChild.innerHTML
+        str=str + txt + ','
+      }
+      divTxt.innerHTML = str
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
